@@ -15,7 +15,7 @@
     <LinearLayout
             android:id="@+id/top_half"
             android:layout_width="match_parent"
-            android:layout_height="280dp"
+            android:layout_height="275dp"
             android:orientation="vertical" />
 
     <FrameLayout
