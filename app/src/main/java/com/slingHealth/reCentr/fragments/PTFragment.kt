@@ -8,27 +8,22 @@ import android.support.v4.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.ListView
 import com.slingHealth.reCentr.R
-import com.slingHealth.reCentr.activities.MainActivity
-import kotlinx.android.synthetic.main.home_fragment.view.*
-
-
-
+import com.slingHealth.reCentr.adapters.ExerciseAdapter
+import com.slingHealth.reCentr.models.Exercise
 
 
 @SuppressLint("ValidFragment")
-class HomeFragment(context: Context) : Fragment() {
+class PTFragment(context: Context) : Fragment() {
     private var parentContext: Context = context
+    private var exerciseList: ArrayList<Exercise> = ArrayList()
+    private val adapter = ExerciseAdapter(this.parentContext, exerciseList)
+    private lateinit var listView: ListView
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
         val view: View = inflater.inflate(R.layout.home_fragment, container, false)
 
-
-        view.b_bluetooth.setOnClickListener { (activity as MainActivity).showFragment(StatsFragment(this.parentContext)) }
-
-        view.b_stats.setOnClickListener { (activity as MainActivity).showFragment(StatsFragment(this.parentContext)) }
-
-        view.b_pt.setOnClickListener { (activity as MainActivity).showFragment(PTFragment(this.parentContext)) }
 
         return inflater.inflate(R.layout.home_fragment, container, false)
     }
