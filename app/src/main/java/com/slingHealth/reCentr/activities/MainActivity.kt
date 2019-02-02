@@ -38,7 +38,7 @@ class MainActivity : AppCompatActivity() {
         }
     }
 
-    private fun showFragment(fragment: Fragment) {
+    fun showFragment(fragment: Fragment) {
 
         fm.beginTransaction()
             .addToBackStack(null)
