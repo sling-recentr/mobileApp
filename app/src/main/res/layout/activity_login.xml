@@ -11,16 +11,34 @@
     <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:orientation="vertical">
+            android:orientation="vertical"
+            android:layout_centerVertical="true">
 
-        <ImageView android:layout_width="150dp"
-                   android:layout_height="150dp"
+        <ImageView android:layout_width="100dp"
+                   android:layout_height="100dp"
                    android:src="@drawable/prelimICON"
                    android:layout_gravity="center_horizontal"/>
+
+
+        <TextView android:layout_width="wrap_content"
+                  android:layout_height="match_parent"
+                  android:text="reCentr"
+        android:textColor="@color/colorWhite"
+        android:layout_gravity="center"
+                  android:textSize="25sp"
+        />
+
+
+        <EditText android:layout_width="match_parent"
+                  android:layout_height="wrap_content"
+                  android:padding="10dp"
+                  android:layout_marginStart="20dp"
+                  android:layout_marginEnd="20dp"
+                  android:layout_marginTop="20dp"
+                  android:background="@drawable/login_edit_background"/>
+
+
     </LinearLayout>
-
-
-
 
 
 </RelativeLayout>
