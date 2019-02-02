@@ -23,20 +23,12 @@ class HomeFragment(context: Context) : Fragment() {
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
         val view: View = inflater.inflate(R.layout.home_fragment, container, false)
 
-
         view.b_bluetooth.setOnClickListener { (activity as MainActivity).showFragment(StatsFragment(this.parentContext)) }
 
         view.b_stats.setOnClickListener { (activity as MainActivity).showFragment(StatsFragment(this.parentContext)) }
 
         view.b_pt.setOnClickListener { (activity as MainActivity).showFragment(PTFragment(this.parentContext)) }
 
-        return inflater.inflate(R.layout.home_fragment, container, false)
+        return view
     }
-
-    override fun onStart() {
-        super.onStart()
-
-    }
-
-
 }

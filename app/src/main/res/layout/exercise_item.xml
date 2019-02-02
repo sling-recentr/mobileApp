@@ -11,10 +11,9 @@
             android:id="@+id/tv_exercise_name"
             android:layout_width="wrap_content"
             android:textSize="24sp"
-            android:text="Name"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="12dp"
-            android:layout_marginLeft="24dp"/>
+            android:text="@string/name"
+            android:gravity="center_vertical"
+            android:layout_height="wrap_content"/>
 
 
 </RelativeLayout>

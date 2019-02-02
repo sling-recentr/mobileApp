@@ -35,4 +35,12 @@
     <string name="menu_scan">Scan</string>
     <string name="menu_stop">Stop</string>
 
+
+    <string name="enter_exercise">Enter Exercise</string>
+    <string name="submit">Submit</string>
+    <string name="name">Name</string>
+    <string name="rehabilitation_exercises">Rehabilitation Exercises</string>
+    <string name="track">Track</string>
+    <string name="trends">Trends</string>
+
 </resources>
