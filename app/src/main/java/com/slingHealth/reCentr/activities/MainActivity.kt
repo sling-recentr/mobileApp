@@ -11,7 +11,7 @@ import kotlinx.android.synthetic.main.activity_main.*
 
 class MainActivity : AppCompatActivity() {
 
-    private val fm = this.supportFragmentManager
+    val fm = this.supportFragmentManager
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -38,7 +38,7 @@ class MainActivity : AppCompatActivity() {
         }
     }
 
-    fun showFragment(fragment: Fragment) {
+     fun showFragment(fragment: Fragment) {
 
         fm.beginTransaction()
             .addToBackStack(null)
