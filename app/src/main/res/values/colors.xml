@@ -6,9 +6,7 @@
     <color name="trustUsWithYourDataBlue">#6BB0F9</color>
     <color name="colorLightGray">#CECECE</color>
     <color name="colorWhite">#fdfdfd</color>
-    <color name="colorRed">#fd9084</color>
-    <color name="colorYellow">#F9F34D</color>
-    <color name="colorGreen">#38bc3b</color>
     <color name="colorBlack">#000608</color>
+    <color name="light_gray">#bfbfbf</color>
 </resources>
 

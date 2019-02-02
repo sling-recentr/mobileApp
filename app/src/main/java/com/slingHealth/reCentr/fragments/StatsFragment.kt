@@ -17,10 +17,10 @@ class StatsFragment(context: Context) : Fragment() {
     private var parentContext: Context = context
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
-        val view: View = inflater.inflate(R.layout.home_fragment, container, false)
+        val view: View = inflater.inflate(R.layout.stats_fragment, container, false)
 
 
-        return inflater.inflate(R.layout.home_fragment, container, false)
+        return view
     }
 
     override fun onStart() {
