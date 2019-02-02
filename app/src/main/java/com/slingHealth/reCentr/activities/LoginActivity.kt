@@ -1,12 +1,10 @@
 package com.slingHealth.reCentr.activities
 
 import android.os.Bundle
-import android.support.v4.app.Fragment
 import android.support.v7.app.AppCompatActivity
 import android.view.Menu
 import android.view.MenuItem
 import com.slingHealth.reCentr.R
-import com.slingHealth.reCentr.fragments.HomeFragment
 import kotlinx.android.synthetic.main.activity_main.*
 
 
