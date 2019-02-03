@@ -48,8 +48,10 @@
                   android:background="@drawable/login_edit_background"
                   android:drawableStart="@drawable/iconpassword"
                   android:hint="Password"
-                  android:textColor="@color/colorWhite"
-                  android:drawableLeft="@drawable/iconpassword"/>
+                  android:inputType="textPassword"
+                  android:drawableLeft="@drawable/iconpassword"
+                  android:drawableEnd="@drawable/eye"
+                  android:drawableRight="@drawable/eye"/>
 
         <TextView android:layout_width="wrap_content"
                   android:layout_height="wrap_content"
@@ -70,7 +72,7 @@
                 android:textColor="@color/colorWhite"
                 android:textSize="16sp"
                 android:padding="2dp"
-        android:id="@+id/b_signin"/>
+                android:id="@+id/b_signin"/>
 
         <Button android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
