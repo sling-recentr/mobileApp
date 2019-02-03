@@ -36,7 +36,8 @@
                   android:layout_marginTop="20dp"
                   android:background="@drawable/login_edit_background"
                   android:drawableStart="@drawable/usericon"
-                  android:hint="Username"/>
+                  android:hint="Username"
+                  android:drawableLeft="@drawable/usericon"/>
 
         <EditText android:layout_width="match_parent"
                   android:layout_height="wrap_content"
@@ -47,7 +48,8 @@
                   android:background="@drawable/login_edit_background"
                   android:drawableStart="@drawable/iconpassword"
                   android:hint="Password"
-                  android:textColor="@color/colorWhite"/>
+                  android:textColor="@color/colorWhite"
+                  android:drawableLeft="@drawable/iconpassword"/>
 
         <TextView android:layout_width="wrap_content"
                   android:layout_height="wrap_content"
@@ -67,7 +69,8 @@
                 android:textAllCaps="false"
                 android:textColor="@color/colorWhite"
                 android:textSize="16sp"
-                android:padding="2dp"/>
+                android:padding="2dp"
+        android:id="@+id/b_signin"/>
 
         <Button android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
@@ -78,7 +81,8 @@
                 android:textSize="16sp"
                 android:background="@drawable/b_signup_background"
                 android:padding="2dp"
-        >
+                android:id="@+id/b_signup"
+        />
 
 
     </LinearLayout>

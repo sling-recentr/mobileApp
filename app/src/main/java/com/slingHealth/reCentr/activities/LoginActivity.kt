@@ -1,9 +1,11 @@
 package com.slingHealth.reCentr.activities
 
+import android.content.Intent
 import android.os.Bundle
 import android.support.v7.app.AppCompatActivity
 import android.view.Menu
 import android.view.MenuItem
+import android.widget.Button
 import com.slingHealth.reCentr.R
 import kotlinx.android.synthetic.main.activity_main.*
 
@@ -15,6 +17,10 @@ class LoginActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_login )
         setSupportActionBar(toolbar)
+        findViewById<Button>(R.id.b_signin).setOnClickListener {
+            val intent = Intent(this, MainActivity::class.java)
+            this.startActivity(intent)
+        }
 
     }
 
