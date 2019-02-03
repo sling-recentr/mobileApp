@@ -1,7 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <RelativeLayout
         xmlns:android="http://schemas.android.com/apk/res/android"
-        xmlns:app="http://schemas.android.com/apk/res-auto"
         xmlns:tools="http://schemas.android.com/tools"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
@@ -22,7 +21,7 @@
 
         <TextView android:layout_width="wrap_content"
                   android:layout_height="match_parent"
-                  android:text="reCentr"
+                  android:text="@string/app_name"
                   android:textColor="@color/colorWhite"
                   android:layout_gravity="center"
                   android:textSize="25sp"
@@ -47,8 +46,39 @@
                   android:layout_marginTop="20dp"
                   android:background="@drawable/login_edit_background"
                   android:drawableStart="@drawable/iconpassword"
-                  android:hint="Password"/>
+                  android:hint="Password"
+                  android:textColor="@color/colorWhite"/>
 
+        <TextView android:layout_width="wrap_content"
+                  android:layout_height="wrap_content"
+                  android:text="Forgot Password?"
+                  android:layout_marginStart="20dp"
+                  android:layout_marginEnd="20dp"
+                  android:layout_gravity="end"
+                  android:padding="2dp"
+                  android:textSize="12sp"
+        />
+
+        <Button android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center_horizontal"
+                android:background="@drawable/b_signin_background"
+                android:text="Sign In"
+                android:textAllCaps="false"
+                android:textColor="@color/colorWhite"
+                android:textSize="16sp"
+                android:padding="2dp"/>
+
+        <Button android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center_horizontal"
+                android:text="Sign Up"
+                android:textAllCaps="false"
+                android:textColor="@color/colorWhite"
+                android:textSize="16sp"
+                android:background="@drawable/b_signup_background"
+                android:padding="2dp"
+        >
 
 
     </LinearLayout>
