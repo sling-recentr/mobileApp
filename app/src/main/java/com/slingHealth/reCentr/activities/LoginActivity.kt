@@ -16,7 +16,7 @@ class LoginActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_login )
-        setSupportActionBar(toolbar)
+        //setSupportActionBar(toolbar)
         findViewById<Button>(R.id.b_signin).setOnClickListener {
             val intent = Intent(this, MainActivity::class.java)
             this.startActivity(intent)

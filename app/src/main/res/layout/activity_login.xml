@@ -15,7 +15,7 @@
 
         <ImageView android:layout_width="100dp"
                    android:layout_height="100dp"
-                   android:src="@drawable/prelimICON"
+                   android:src="@drawable/prelim_icon"
                    android:layout_gravity="center_horizontal"/>
 
 

@@ -16,12 +16,20 @@
             android:id="@+id/top_half"
             android:layout_width="match_parent"
             android:layout_height="280dp"
-            android:orientation="vertical" />
+            android:orientation="vertical"/>
 
     <FrameLayout
             android:id="@+id/frag_placeholder"
             android:layout_width="match_parent"
             android:layout_height="280dp"/>
+
+    <TextView
+            android:id="@+id/tv_data"
+            android:textColor="@color/colorBlack"
+            android:textSize="100sp"
+            android:gravity="center"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"/>
 
 
     <LinearLayout
@@ -39,7 +47,7 @@
                 android:background="@drawable/rounded_button"
                 android:backgroundTint="@color/colorLightGray"
                 android:text="@string/connect_bluetooth_device"
-                android:textColor="@color/colorWhite" />
+                android:textColor="@color/colorWhite"/>
 
 
     </LinearLayout>
@@ -62,7 +70,7 @@
                 android:drawableTop="@drawable/ic_bar_chart"
                 android:text="@string/stats"
                 android:textColor="@color/colorWhite"
-                android:textSize="15dp" />
+                android:textSize="15sp"/>
 
         <Button
                 android:id="@+id/b_pt"
@@ -76,7 +84,7 @@
                 android:drawableTop="@drawable/ic_physical_therapy"
                 android:text="@string/physical_therapy"
                 android:textColor="@color/colorWhite"
-                android:textSize="15dp" />
+                android:textSize="15dp"/>
 
 
     </LinearLayout>
