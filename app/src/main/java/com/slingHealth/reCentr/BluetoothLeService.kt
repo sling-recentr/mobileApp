@@ -1,23 +1,14 @@
-package com.slingHealth.reCentr.activities
+package com.slingHealth.reCentr
 
 
 import android.app.Service
-import android.bluetooth.BluetoothAdapter
-import android.bluetooth.BluetoothDevice
-import android.bluetooth.BluetoothGatt
-import android.bluetooth.BluetoothGattCallback
-import android.bluetooth.BluetoothGattCharacteristic
-import android.bluetooth.BluetoothGattDescriptor
-import android.bluetooth.BluetoothGattService
-import android.bluetooth.BluetoothManager
-import android.bluetooth.BluetoothProfile
+import android.bluetooth.*
 import android.content.Context
 import android.content.Intent
 import android.os.Binder
 import android.os.IBinder
 import android.util.Log
-import com.slingHealth.reCentr.AdafruitBluefruitLeAttributes
-import java.util.UUID
+import java.util.*
 
 /**
  * Service for managing connection and data communication with a GATT server hosted on a
@@ -116,6 +107,9 @@ class BluetoothLeService : Service() {
         val heartRate = characteristic.getStringValue(0)
         Log.d(TAG, String.format("Data: %s", heartRate))
         intent.putExtra(EXTRA_DATA, heartRate.toString())
+        //setResult(RESULT_OK, intent)
+
+
         /*else {
                    // For all other profiles, writes the data formatted in HEX.
                    final byte[] data = characteristic.getValue();

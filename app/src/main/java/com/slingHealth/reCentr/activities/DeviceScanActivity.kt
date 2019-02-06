@@ -106,9 +106,9 @@ class DeviceScanActivity : ListActivity() {
 
     override fun onListItemClick(l: ListView, v: View, position: Int, id: Long) {
         val device = mLeDeviceListAdapter!!.getDevice(position) ?: return
-        val intent = Intent(this, DeviceConnectedActivity::class.java)
-        intent.putExtra(DeviceConnectedActivity.EXTRAS_DEVICE_NAME, device.name)
-        intent.putExtra(DeviceConnectedActivity.EXTRAS_DEVICE_ADDRESS, device.address)
+        val intent = Intent(this, MainActivity::class.java)
+        intent.putExtra(MainActivity.EXTRAS_DEVICE_NAME, device.name)
+        intent.putExtra(MainActivity.EXTRAS_DEVICE_ADDRESS, device.address)
         if (mScanning) {
             mBluetoothAdapter!!.stopLeScan(mLeScanCallback)
             mScanning = false
