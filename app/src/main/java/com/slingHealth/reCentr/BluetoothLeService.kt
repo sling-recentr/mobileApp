@@ -105,6 +105,7 @@ class BluetoothLeService : Service() {
             Log.d(TAG, "Data format UINT8.")
         }
         val heartRate = characteristic.getStringValue(0)
+
         Log.d(TAG, String.format("Data: %s", heartRate))
         intent.putExtra(EXTRA_DATA, heartRate.toString())
         //setResult(RESULT_OK, intent)

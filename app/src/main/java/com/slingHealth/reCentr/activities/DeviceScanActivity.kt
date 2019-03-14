@@ -136,13 +136,8 @@ class DeviceScanActivity : ListActivity() {
 
     // Adapter for holding devices found through scanning.
     private inner class LeDeviceListAdapter : BaseAdapter() {
-        private val mLeDevices: ArrayList<BluetoothDevice>
-        private val mInflator: LayoutInflater
-
-        init {
-            mLeDevices = ArrayList()
-            mInflator = this@DeviceScanActivity.layoutInflater
-        }
+        private val mLeDevices: ArrayList<BluetoothDevice> = ArrayList()
+        private val mInflator: LayoutInflater = this@DeviceScanActivity.layoutInflater
 
         fun addDevice(device: BluetoothDevice) {
             if (!mLeDevices.contains(device)) {
@@ -204,8 +199,8 @@ class DeviceScanActivity : ListActivity() {
 
     companion object {
 
-        private val REQUEST_ENABLE_BT = 1
+        private const val REQUEST_ENABLE_BT = 1
         // Stops scanning after 10 seconds.
-        private val SCAN_PERIOD: Long = 10000
+        private const val SCAN_PERIOD: Long = 10000
     }
 }

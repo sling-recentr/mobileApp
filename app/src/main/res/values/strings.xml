@@ -42,5 +42,19 @@
     <string name="rehabilitation_exercises">Rehabilitation Exercises</string>
     <string name="track">Track</string>
     <string name="trends">Trends</string>
+    <string name="title_activity_hamburger">HamburgerActivity</string>
+    <string name="navigation_drawer_open">Open navigation drawer</string>
+    <string name="navigation_drawer_close">Close navigation drawer</string>
+    <string name="nav_header_title">Android Studio</string>
+    <string name="nav_header_subtitle">android.studio@android.com</string>
+    <string name="nav_header_desc">Navigation header</string>
+    <string name="sign_out">Sign Out</string>
+    <string name="about_us">About us</string>
+    <string name="privacy_policy">Privacy Policy</string>
+    <string name="logo">logo</string>
+    <string name="info_about_us">Here at reCentr we stive to help people from all walks of life to enjoy the many health
+        benefits that come with good posture. With our signature device, you to can begin improving your posture today.
+    </string>
+    <string name="close">Close</string>
 
 </resources>
