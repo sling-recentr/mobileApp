@@ -47,18 +47,16 @@
         <EditText
                 android:id="@+id/et_password"
                 android:layout_width="match_parent"
-                  android:layout_height="wrap_content"
-                  android:padding="10dp"
-                  android:layout_marginStart="20dp"
-                  android:layout_marginEnd="20dp"
-                  android:layout_marginTop="20dp"
-                  android:background="@drawable/login_edit_background"
-                  android:drawableStart="@drawable/iconpassword"
-                  android:hint="Password"
-                  android:inputType="textPassword"
-                  android:drawableLeft="@drawable/iconpassword"
-                  android:drawableEnd="@drawable/eye"
-                  android:drawableRight="@drawable/eye"/>
+                android:layout_height="wrap_content"
+                android:padding="10dp"
+                android:layout_marginStart="20dp"
+                android:layout_marginEnd="20dp"
+                android:layout_marginTop="20dp"
+                android:background="@drawable/login_edit_background"
+                android:drawableStart="@drawable/iconpassword"
+                android:hint="Password"
+                android:inputType="textPassword"
+                android:drawableLeft="@drawable/iconpassword"/>
 
         <TextView android:layout_width="wrap_content"
                   android:layout_height="wrap_content"

@@ -1,10 +1,12 @@
 package com.slingHealth.reCentr.activities
 
+import android.annotation.SuppressLint
 import android.app.ActionBar
 import android.app.Dialog
 import android.bluetooth.BluetoothGattCharacteristic
 import android.bluetooth.BluetoothGattService
 import android.content.*
+import android.net.Uri
 import android.os.Bundle
 import android.os.IBinder
 import android.support.design.widget.NavigationView
@@ -16,23 +18,25 @@ import android.view.Menu
 import android.view.MenuItem
 import android.widget.Button
 import android.widget.TextView
-import com.anychart.AnyChart
-import com.anychart.AnyChartView
-import com.anychart.chart.common.dataentry.SingleValueDataSet
-import com.anychart.enums.Anchor
-import com.anychart.graphics.vector.text.HAlign
 import com.google.firebase.auth.FirebaseAuth
+import com.google.firebase.database.*
 import com.slingHealth.reCentr.AdafruitBluefruitLeAttributes
 import com.slingHealth.reCentr.BluetoothLeService
 import com.slingHealth.reCentr.R
+import com.slingHealth.reCentr.models.DayStatistic
 import kotlinx.android.synthetic.main.activity_main.*
 import kotlinx.android.synthetic.main.app_bar_main.*
 import kotlinx.android.synthetic.main.content_main.*
+import java.text.SimpleDateFormat
+import java.util.*
 
 
 class MainActivity : AppCompatActivity(), NavigationView.OnNavigationItemSelectedListener {
 
     private lateinit var auth: FirebaseAuth
+    private lateinit var database: DatabaseReference
+    private lateinit var statReference: DatabaseReference
+    private lateinit var today: DayStatistic
     private var mDataField: TextView? = null
     private var mDegreeField: TextView? = null
     private var mDeviceName: String? = null
@@ -40,14 +44,27 @@ class MainActivity : AppCompatActivity(), NavigationView.OnNavigationItemSelecte
     private var mBluetoothLeService: BluetoothLeService? = null
     private var mConnected = false
     private var mNotifyCharacteristic: BluetoothGattCharacteristic? = null
+    private lateinit var stringDate: String
+    private var count = 0
 
+    @SuppressLint("MissingPermission")
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
         setSupportActionBar(toolbar)
-        //b_bluetooth.backgroundTintList = this.resources.getColorStateList(R.color.tint_list, this.theme)
+        val date = Date()
+        val newDate = Date(date.time + 604800000L * 2 + 24 * 60 * 60)
+        val dt = SimpleDateFormat("yyyy-MM-dd")
+
+        stringDate = dt.format(newDate)
+
+        database = FirebaseDatabase.getInstance().reference
         auth = FirebaseAuth.getInstance()
 
+        statReference = FirebaseDatabase.getInstance().reference
+            .child("statistics").child(auth.currentUser!!.uid).child(stringDate)
+
+        newStat()
         val toggle = ActionBarDrawerToggle(
             this, drawer_layout, toolbar,
             R.string.navigation_drawer_open,
@@ -85,7 +102,56 @@ class MainActivity : AppCompatActivity(), NavigationView.OnNavigationItemSelecte
         val gattServiceIntent = Intent(this, BluetoothLeService::class.java)
         bindService(gattServiceIntent, mServiceConnection, Context.BIND_AUTO_CREATE)
 
-        initOrientationChart()
+    }
+
+    // [START write_fan_out]
+    private fun writeStatUpdate() {
+        // Create new post at /user-posts/$userid/$postid and at
+        // /posts/$postid simultaneously
+        val key = stringDate
+
+
+        val statValues = today.toMap()
+
+        val childUpdates = HashMap<String, Any>()
+        childUpdates["/statistics/${auth.currentUser!!.uid}/$key"] = statValues
+
+        database.updateChildren(childUpdates)
+    }
+    // [END write_fan_out]
+
+    private fun newStat() {
+        statReference.addListenerForSingleValueEvent(
+            object : ValueEventListener {
+
+                override fun onDataChange(dataSnapshot: DataSnapshot) {
+                    val currentStat = dataSnapshot.getValue(DayStatistic::class.java)
+
+                    if (currentStat == null) {
+                        today = DayStatistic()
+                        statReference.setValue(today)
+                    } else {
+                        today = currentStat
+                    }
+                }
+
+                override fun onCancelled(databaseError: DatabaseError) {
+                    Log.w("", "getUser:onCancelled", databaseError.toException())
+                }
+
+            })
+
+    }
+
+    private fun checkData(data: Double) {
+        if (data > today.maximum) {
+            today.maximum = data
+        }
+        if (data > 8.0) {
+            today.total++
+            today.data[Calendar.getInstance().get(Calendar.HOUR)]++
+        }
+        writeStatUpdate()
     }
 
 
@@ -122,11 +188,9 @@ class MainActivity : AppCompatActivity(), NavigationView.OnNavigationItemSelecte
                     mConnected = true
                     b_bluetooth.setBackgroundColor(250)
 
-                    //updateConnectionState(R.string.connected);
                 }
                 BluetoothLeService.ACTION_GATT_DISCONNECTED -> {
                     mConnected = false
-                    //updateConnectionState(R.string.disconnected);
                     clearUI()
                 }
                 BluetoothLeService.ACTION_GATT_SERVICES_DISCOVERED -> findUARTService(mBluetoothLeService!!.supportedGattServices)
@@ -183,7 +247,6 @@ class MainActivity : AppCompatActivity(), NavigationView.OnNavigationItemSelecte
 
 
     private fun clearUI() {
-        // mGattServicesList.setAdapter((SimpleExpandableListAdapter) null);
         mDataField!!.text = "---"
     }
 
@@ -227,14 +290,6 @@ class MainActivity : AppCompatActivity(), NavigationView.OnNavigationItemSelecte
     }
 
 
-    private fun displayData(data: String?) {
-        if (data != null && data.length >= 6) {
-            Log.d(TAG, data.length.toString())
-            mDataField!!.text = data
-            mDegreeField!!.text = "°"
-        }
-    }
-
     companion object {
         private val TAG = MainActivity::class.java.simpleName
 
@@ -264,9 +319,6 @@ class MainActivity : AppCompatActivity(), NavigationView.OnNavigationItemSelecte
     override fun onNavigationItemSelected(item: MenuItem): Boolean {
         // Handle navigation view item clicks here.
         when (item.itemId) {
-            R.id.home -> {
-                // Handle the camera action
-            }
             R.id.b_about_us -> {
                 displayDialog(R.layout.dialog_about_us)
             }
@@ -293,115 +345,27 @@ class MainActivity : AppCompatActivity(), NavigationView.OnNavigationItemSelecte
         dialog.show()
     }
 
-    private fun initOrientationChart() {
-        val anyChartView: AnyChartView = findViewById(R.id.any_chart_view)
-        anyChartView.setProgressBar(findViewById(R.id.progress_bar))
+    @SuppressLint("MissingPermission")
+    private fun displayData(data: String?) {
 
-        val circularGauge = AnyChart.circular()
-        circularGauge.fill("#fff")
-            .stroke(null)
-            .padding(0, 0, 0, 0)
-            .margin(30, 30, 30, 30)
-        circularGauge.startAngle(0)
-            .sweepAngle(360)
+        if (data != null && data.length >= 6) {
+            if (data.contains("HELP")) {
+                val number = "+19144348523"
+                val intent = Intent(Intent.ACTION_CALL)
+                intent.data = Uri.parse("tel:$number")
+                startActivity(intent)
+            }
+            if (count % 10 == 0) {
+                checkData(data.toDouble())
+            }
+            count++
 
-        val currentValue = 0.00
-        circularGauge.data(SingleValueDataSet(arrayOf(currentValue)))
 
-        circularGauge.axis(0)
-            .startAngle(-150)
-            .radius(80)
-            .sweepAngle(300)
-            .width(3)
-            .ticks("{ type: 'line', length: 4, position: 'outside' }")
-
-        circularGauge.axis(0).labels().position("outside")
-
-        circularGauge.axis(0).scale()
-            .minimum(-45)
-            .maximum(45)
-
-        circularGauge.axis(0).scale()
-            .ticks("{interval: 15}")
-            .minorTicks("{interval: 15}")
-
-        circularGauge.needle(0)
-            .stroke(null)
-            .startRadius("6%")
-            .endRadius("70%")
-            .startWidth("2%")
-            .endWidth(0)
-
-        circularGauge.cap()
-            .radius("4%")
-            .enabled(true)
-            .stroke(null)
-
-        circularGauge.label(0)
-            .text("<span style=\"font-size: 25\"></span>")
-            .useHtml(true)
-            .hAlign(HAlign.CENTER)
-        circularGauge.label(0)
-            .anchor(Anchor.CENTER_TOP)
-            .offsetY(100)
-            .padding(15, 20, 0, 0)
-
-        circularGauge.label(1)
-            .text("<span style=\"font-size: 20\">$currentValue</span>")
-            .useHtml(true)
-            .hAlign(HAlign.CENTER)
-        circularGauge.label(1)
-            .anchor(Anchor.CENTER_TOP)
-            .offsetY(-100)
-            .padding(5, 10, 0, 0)
-            .background("{fill: 'none', stroke: '#c1c1c1', corners: 3, cornerType: 'ROUND'}")
-
-        circularGauge.range(
-            0,
-            "{\n" +
-                    "    from: -8,\n" +
-                    "    to: 8,\n" +
-                    "    position: 'inside',\n" +
-                    "    fill: 'green 0.5',\n" +
-                    "    stroke: '1 #000',\n" +
-                    "    startSize: 6,\n" +
-                    "    endSize: 6,\n" +
-                    "    radius: 80,\n" +
-                    "    zIndex: 1\n" +
-                    "  }"
-        )
-
-        circularGauge.range(
-            1,
-            ("{\n" +
-                    "    from: -45,\n" +
-                    "    to: -8,\n" +
-                    "    position: 'inside',\n" +
-                    "    fill: 'red 0.5',\n" +
-                    "    stroke: '1 #000',\n" +
-                    "    startSize: 6,\n" +
-                    "    endSize: 6,\n" +
-                    "    radius: 80,\n" +
-                    "    zIndex: 1\n" +
-                    "  }")
-        )
-
-        circularGauge.range(
-            2,
-            ("{\n" +
-                    "    from: 8,\n" +
-                    "    to: 45,\n" +
-                    "    position: 'inside',\n" +
-                    "    fill: 'red 0.5',\n" +
-                    "    stroke: '1 #000',\n" +
-                    "    startSize: 6,\n" +
-                    "    endSize: 6,\n" +
-                    "    radius: 80,\n" +
-                    "    zIndex: 1\n" +
-                    "  }")
-        )
-
-        anyChartView.setChart(circularGauge)
+            Log.d(TAG, data.length.toString())
+            pointerSpeedometer.speedTo(data.toFloat())
+            mDataField!!.text = data
+            mDegreeField!!.text = "°"
+        }
     }
 
 

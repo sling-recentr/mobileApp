@@ -16,39 +16,40 @@
             android:id="@+id/top_half"
             android:layout_width="match_parent"
             android:layout_height="320dp"
-            android:orientation="vertical"/>
+            android:orientation="vertical"
+            android:layout_marginTop="@dimen/activity_vertical_margin_big">
 
-    <com.anychart.AnyChartView
-            android:id="@+id/any_chart_view"
-            android:layout_width="match_parent"
-            android:layout_height="365dp"
-            app:layout_constraintBottom_toTopOf="@id/bottom_half"
+        <com.github.anastr.speedviewlib.PointerSpeedometer
+                android:id="@+id/pointerSpeedometer"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                app:sv_minSpeed="-90"
+                app:sv_maxSpeed="90"
+                app:sv_backgroundCircleColor="@color/colorWhite"
+                app:sv_pointerColor="@color/colorPrimary"
+                app:sv_indicatorColor="@color/colorPrimary"
+                app:sv_unitUnderSpeedText="false"
+                app:sv_indicator="TriangleIndicator"
+                app:sv_withTremble="false"
     />
+    </LinearLayout>
 
-    <ProgressBar
-            android:id="@+id/progress_bar"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            app:layout_constraintBottom_toTopOf="@id/bottom_half"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent"
-    />
+
     <TextView
             android:id="@+id/tv_degree"
-            android:textColor="@color/colorBlack"
-            android:textSize="100sp"
-            android:layout_marginTop="120dp"
+            android:textColor="@color/colorPrimary"
+            android:textSize="50sp"
+            android:layout_marginTop="200dp"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_alignEnd="@+id/tv_data"/>
+            android:layout_toRightOf="@+id/tv_data"/>
     <TextView
             android:id="@+id/tv_data"
-            android:textColor="@color/colorBlack"
-            android:textSize="100sp"
-            android:layout_marginTop="120dp"
-            android:gravity="center"
-            android:layout_width="match_parent"
+            android:textColor="@color/colorPrimary"
+            android:textSize="50sp"
+            android:layout_marginTop="200dp"
+            android:layout_marginLeft="140dp"
+            android:layout_width="wrap_content"
             android:layout_height="wrap_content"/>
 
 

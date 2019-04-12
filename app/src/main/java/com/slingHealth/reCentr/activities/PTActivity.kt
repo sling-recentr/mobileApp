@@ -3,6 +3,7 @@ package com.slingHealth.reCentr.activities
 import android.app.ActionBar
 import android.app.Dialog
 import android.content.Context
+import android.graphics.Color
 import android.os.Bundle
 import android.support.v7.app.AppCompatActivity
 import android.support.v7.widget.LinearLayoutManager
@@ -36,7 +37,8 @@ class PTActivity : AppCompatActivity() {
         auth = FirebaseAuth.getInstance()
 
 
-        exerciseReference = FirebaseDatabase.getInstance().reference
+
+        exerciseReference = database
             .child("exercises").child(auth.currentUser!!.uid)
 
         adapter = ExerciseAdapter(this, exerciseReference)
@@ -72,7 +74,7 @@ class PTActivity : AppCompatActivity() {
 
                 else -> {
                     val name = exertv.text.toString()
-                    val exercise = Exercise(name, "Info")
+                    val exercise = Exercise(name, "Info", false)
                     exerciseReference.push().setValue(exercise)
 
                     dialog.dismiss()
@@ -84,8 +86,37 @@ class PTActivity : AppCompatActivity() {
 
     private class ExerciseViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
 
+//        private lateinit var exerciseReference: DatabaseReference
+//        private lateinit var database: DatabaseReference
+//        private lateinit var auth: FirebaseAuth
+
+
+
         fun bind(exercise: Exercise) {
+//            database = FirebaseDatabase.getInstance().reference
+//            auth = FirebaseAuth.getInstance()
+//
+//
+//
+//            exerciseReference = database
+//                .child("exercises").child(auth.currentUser!!.uid)
+
             itemView.tv_exercise_name.text = exercise.name
+
+            itemView.b_complete.setOnClickListener {
+                exercise.complete = true
+                itemView.b_complete.setBackgroundColor(Color.GREEN)
+//                val key =
+//
+//
+//                val exerciseValues = exercise.toMap()
+//
+//                val childUpdates = HashMap<String, Any>()
+//                childUpdates["/exercises/${auth.currentUser!!.uid}/$key"] = exerciseValues
+//
+//                database.updateChildren(childUpdates)
+
+            }
         }
     }
 
