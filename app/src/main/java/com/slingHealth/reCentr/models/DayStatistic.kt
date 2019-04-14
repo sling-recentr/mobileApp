@@ -5,7 +5,7 @@ import com.google.firebase.database.Exclude
 
 class DayStatistic {
 
-    var data: MutableList<Double> = MutableList(12) { 0.0 }
+    var data: MutableList<Double> = MutableList(24) { 0.0 }
     var total: Int = 0
     var maximum: Double = 0.00
 

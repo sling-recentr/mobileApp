@@ -77,7 +77,7 @@ class StatsActivity : AppCompatActivity() {
                         today = currentStat
                     }
                     total.text = "Total: ${today.total}"
-                    maximum.text = "Maximum: ${today.maximum}"
+                    maximum.text = "Maximum: ${today.maximum}°"
                     initGraph()
                 }
 
@@ -91,10 +91,6 @@ class StatsActivity : AppCompatActivity() {
 
     private fun initGraph() {
 
-//        val rightNow = Calendar.getInstance()
-//        val currentHour = rightNow.get(Calendar.HOUR)
-
-        //val graph = view!!.findViewById(R.id.graph) as GraphView
         val series = BarGraphSeries<DataPoint>(
             arrayOf(
                 DataPoint(0.0, today.data[0]),
@@ -108,14 +104,30 @@ class StatsActivity : AppCompatActivity() {
                 DataPoint(8.0, today.data[8]),
                 DataPoint(9.0, today.data[9]),
                 DataPoint(10.0, today.data[10]),
-                DataPoint(11.0, today.data[11])
+                DataPoint(11.0, today.data[11]),
+                DataPoint(12.0, today.data[12]),
+                DataPoint(13.0, today.data[13]),
+                DataPoint(14.0, today.data[14]),
+                DataPoint(15.0, today.data[15]),
+                DataPoint(16.0, today.data[16]),
+                DataPoint(17.0, today.data[17]),
+                DataPoint(18.0, today.data[18]),
+                DataPoint(19.0, today.data[19]),
+                DataPoint(20.0, today.data[20]),
+                DataPoint(21.0, today.data[21]),
+                DataPoint(22.0, today.data[22]),
+                DataPoint(23.0, today.data[23])
+
             )
         )
-        series.spacing = 10
-        series.dataWidth = 0.5
+        //series.spacing = 10
+        //series.dataWidth = 0.5
         series.isAnimated = true
         graph.addSeries(series)
-        graph.gridLabelRenderer.numHorizontalLabels = 7
+        graph.gridLabelRenderer.numHorizontalLabels = 13
+        graph.gridLabelRenderer.horizontalAxisTitle = "Hour"
+        graph.title = "Deviations from upright position today"
+
 
     }
 

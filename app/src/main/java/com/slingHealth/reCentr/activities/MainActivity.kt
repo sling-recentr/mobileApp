@@ -323,8 +323,10 @@ class MainActivity : AppCompatActivity(), NavigationView.OnNavigationItemSelecte
                 displayDialog(R.layout.dialog_about_us)
             }
             R.id.b_privacy_policy -> {
+                displayDialog(R.layout.dialog_privacy_policy)
 
             }
+
         }
 
         drawer_layout.closeDrawer(GravityCompat.START)

@@ -26,6 +26,16 @@
             app:layout_constraintTop_toBottomOf="@+id/tv_dialog_title"
     />
 
+    <EditText
+            android:id="@+id/et_exercise_info"
+            android:textSize="18sp"
+            android:padding="16dp"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:hint="Exercise info"
+            app:layout_constraintTop_toBottomOf="@+id/et_exercise_name"
+    />
+
 
     <Button
             android:id="@+id/b_done"
@@ -33,7 +43,7 @@
             android:textSize="18sp"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            app:layout_constraintTop_toBottomOf="@id/et_exercise_name"
+            app:layout_constraintTop_toBottomOf="@id/et_exercise_info"
             app:layout_constraintBottom_toBottomOf="parent"
             android:layout_marginStart="12dp"
             android:layout_marginEnd="12dp"

@@ -11,7 +11,7 @@
             app:layout_constraintLeft_toLeftOf="parent"
             android:id="@+id/graph"
             app:layout_constraintTop_toTopOf="parent"
-            android:layout_marginTop="@dimen/activity_vertical_margin_big"/>
+            android:layout_marginTop="24dp"/>
 
     <TextView
             android:id="@+id/total"

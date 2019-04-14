@@ -3,7 +3,7 @@
         xmlns:android="http://schemas.android.com/apk/res/android"
         xmlns:tools="http://schemas.android.com/tools"
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
+        android:layout_height="match_parent" xmlns:app="http://schemas.android.com/apk/res-auto"
         android:background="@drawable/login_background"
         tools:context=".activities.MainActivity">
 
@@ -44,29 +44,32 @@
                 android:drawableLeft="@drawable/usericon"
         />
 
-        <EditText
-                android:id="@+id/et_password"
+        <android.support.design.widget.TextInputLayout
+                app:layout_constraintTop_toBottomOf="@+id/et_email"
+                android:id="@+id/password_layout"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:padding="10dp"
-                android:layout_marginStart="20dp"
-                android:layout_marginEnd="20dp"
-                android:layout_marginTop="20dp"
-                android:background="@drawable/login_edit_background"
-                android:drawableStart="@drawable/iconpassword"
-                android:hint="Password"
-                android:inputType="textPassword"
-                android:drawableLeft="@drawable/iconpassword"/>
+                app:passwordToggleEnabled="true">
 
-        <TextView android:layout_width="wrap_content"
-                  android:layout_height="wrap_content"
-                  android:text="Forgot Password?"
-                  android:layout_marginStart="20dp"
-                  android:layout_marginEnd="20dp"
-                  android:layout_gravity="end"
-                  android:padding="2dp"
-                  android:textSize="12sp"
-        />
+            <android.support.design.widget.TextInputEditText
+                    android:id="@+id/et_password"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:padding="10dp"
+                    android:layout_marginStart="20dp"
+                    android:layout_marginEnd="20dp"
+                    android:layout_marginTop="20dp"
+                    android:background="@drawable/login_edit_background"
+                    android:drawableStart="@drawable/iconpassword"
+                    android:inputType="textPassword"
+                    android:hint="@string/password"
+                    app:passwordToggleEnabled="true"
+                    app:layout_constraintLeft_toLeftOf="parent"
+                    app:layout_constraintRight_toRightOf="parent"
+                    tools:ignore="Autofill,TextFields"/>
+
+        </android.support.design.widget.TextInputLayout>
+
 
         <Button android:layout_width="wrap_content"
                 android:layout_height="wrap_content"

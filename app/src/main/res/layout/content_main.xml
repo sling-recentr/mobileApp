@@ -15,7 +15,7 @@
     <LinearLayout
             android:id="@+id/top_half"
             android:layout_width="match_parent"
-            android:layout_height="320dp"
+            android:layout_height="340dp"
             android:orientation="vertical"
             android:layout_marginTop="@dimen/activity_vertical_margin_big">
 
@@ -56,14 +56,16 @@
     <LinearLayout
             android:id="@+id/bottom_half"
             android:layout_width="match_parent"
-            android:layout_height="100dp"
+            android:layout_height="wrap_content"
             android:layout_below="@+id/top_half"
-            android:orientation="vertical">
+            android:layout_marginTop="25dp"
+            android:orientation="horizontal">
 
         <Button
                 android:id="@+id/b_bluetooth"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
+                android:layout_marginBottom="25dp"
                 android:layout_marginTop="25dp"
                 android:background="@drawable/rounded_button"
                 android:text="@string/connect_bluetooth_device"
@@ -76,6 +78,7 @@
             android:id="@+id/bottom_half2"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+
             android:layout_below="@+id/bottom_half"
             android:orientation="horizontal">
 
@@ -90,7 +93,8 @@
                 android:drawableTop="@drawable/ic_bar_chart"
                 android:text="@string/stats"
                 android:textColor="@color/colorWhite"
-                android:textSize="15sp"/>
+                android:textSize="15sp"
+                android:layout_marginTop="25dp"/>
 
         <Button
                 android:id="@+id/b_pt"
@@ -104,7 +108,8 @@
                 android:drawableTop="@drawable/ic_physical_therapy"
                 android:text="Exercises"
                 android:textColor="@color/colorWhite"
-                android:textSize="15sp"/>
+                android:textSize="15sp"
+                android:layout_marginTop="25dp"/>
 
 
     </LinearLayout>

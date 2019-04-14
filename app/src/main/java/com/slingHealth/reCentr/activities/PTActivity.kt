@@ -3,7 +3,6 @@ package com.slingHealth.reCentr.activities
 import android.app.ActionBar
 import android.app.Dialog
 import android.content.Context
-import android.graphics.Color
 import android.os.Bundle
 import android.support.v7.app.AppCompatActivity
 import android.support.v7.widget.LinearLayoutManager
@@ -56,8 +55,8 @@ class PTActivity : AppCompatActivity() {
         val dialog = Dialog(this)
         dialog.setContentView(layout)
 
-        val exertv: EditText = dialog.findViewById(R.id.et_exercise_name)
-
+        val textViewName: EditText = dialog.findViewById(R.id.et_exercise_name)
+        val textViewInfo: EditText = dialog.findViewById(R.id.et_exercise_info)
 
         val window = dialog.window
         window?.setLayout(ActionBar.LayoutParams.MATCH_PARENT, ActionBar.LayoutParams.WRAP_CONTENT)
@@ -66,15 +65,16 @@ class PTActivity : AppCompatActivity() {
 
         dialog.findViewById<Button>(R.id.b_done).setOnClickListener {
             when {
-                exertv.text.toString() == "" -> Toast.makeText(
+                textViewName.text.toString() == "" -> Toast.makeText(
                     this,
                     "Please enter exercise name",
                     Toast.LENGTH_SHORT
                 ).show()
 
                 else -> {
-                    val name = exertv.text.toString()
-                    val exercise = Exercise(name, "Info", false)
+                    val name = textViewName.text.toString()
+                    val info = textViewInfo.text.toString()
+                    val exercise = Exercise(name, info, false)
                     exerciseReference.push().setValue(exercise)
 
                     dialog.dismiss()
@@ -86,43 +86,19 @@ class PTActivity : AppCompatActivity() {
 
     private class ExerciseViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
 
-//        private lateinit var exerciseReference: DatabaseReference
-//        private lateinit var database: DatabaseReference
-//        private lateinit var auth: FirebaseAuth
-
-
-
         fun bind(exercise: Exercise) {
-//            database = FirebaseDatabase.getInstance().reference
-//            auth = FirebaseAuth.getInstance()
-//
-//
-//
-//            exerciseReference = database
-//                .child("exercises").child(auth.currentUser!!.uid)
 
             itemView.tv_exercise_name.text = exercise.name
+            itemView.tv_exercise_info.text = exercise.info
 
-            itemView.b_complete.setOnClickListener {
-                exercise.complete = true
-                itemView.b_complete.setBackgroundColor(Color.GREEN)
-//                val key =
-//
-//
-//                val exerciseValues = exercise.toMap()
-//
-//                val childUpdates = HashMap<String, Any>()
-//                childUpdates["/exercises/${auth.currentUser!!.uid}/$key"] = exerciseValues
-//
-//                database.updateChildren(childUpdates)
 
-            }
+
         }
     }
 
     private class ExerciseAdapter(
         private val context: Context,
-        private val databaseReference: DatabaseReference
+        databaseReference: DatabaseReference
     ) : RecyclerView.Adapter<ExerciseViewHolder>() {
 
         private val childEventListener: ChildEventListener?
@@ -152,8 +128,7 @@ class PTActivity : AppCompatActivity() {
                 override fun onChildChanged(dataSnapshot: DataSnapshot, previousChildName: String?) {
                     Log.d("", "onChildChanged: ${dataSnapshot.key}")
 
-                    // A comment has changed, use the key to determine if we are displaying this
-                    // comment and if so displayed the changed comment.
+
                     val newExercise = dataSnapshot.getValue(Exercise::class.java)
                     val exerciseKey = dataSnapshot.key
 
@@ -174,8 +149,6 @@ class PTActivity : AppCompatActivity() {
                 override fun onChildRemoved(dataSnapshot: DataSnapshot) {
                     Log.d("", "onChildRemoved:" + dataSnapshot.key!!)
 
-                    // A comment has changed, use the key to determine if we are displaying this
-                    // comment and if so remove it.
                     val exerciseKey = dataSnapshot.key
 
                     // [START_EXCLUDE]
@@ -195,13 +168,6 @@ class PTActivity : AppCompatActivity() {
 
                 override fun onChildMoved(dataSnapshot: DataSnapshot, previousChildName: String?) {
                     Log.d("", "onChildMoved:" + dataSnapshot.key!!)
-
-                    // A comment has changed position, use the key to determine if we are
-                    // displaying this comment and if so move it.
-                    val movedComment = dataSnapshot.getValue(Exercise::class.java)
-                    val commentKey = dataSnapshot.key
-
-                    // ...
                 }
 
                 override fun onCancelled(databaseError: DatabaseError) {
@@ -227,15 +193,10 @@ class PTActivity : AppCompatActivity() {
 
         override fun onBindViewHolder(holder: ExerciseViewHolder, position: Int) {
             holder.bind(exercises[position])
+
         }
 
         override fun getItemCount(): Int = exercises.size
-
-        fun cleanupListener() {
-            childEventListener?.let {
-                databaseReference.removeEventListener(it)
-            }
         }
 
     }
-}

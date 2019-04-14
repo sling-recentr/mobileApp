@@ -13,6 +13,7 @@
                 android:id="@+id/b_privacy_policy"
                 android:title="@string/privacy_policy"/>
 
+
     </group>
 
 

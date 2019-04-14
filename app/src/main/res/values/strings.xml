@@ -56,5 +56,8 @@
         benefits that come with good posture. With our signature device, you to can begin improving your posture today.
     </string>
     <string name="close">Close</string>
+    <string name="emergency_contact">Emergency Contact</string>
+    <string name="password">Password</string>
+    <string name="info">Info</string>
 
 </resources>
